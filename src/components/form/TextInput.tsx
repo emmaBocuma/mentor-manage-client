@@ -73,12 +73,14 @@ const TextInput = ({
   required,
   name,
   error,
+  type,
 }: ITextInput) => (
   <GroupContainer>
     <TextInputContainer
       onChange={handleChange}
       name={name}
       value={value}
+      type={type}
       required={required}
       className={error ? 'error' : ''}
     />

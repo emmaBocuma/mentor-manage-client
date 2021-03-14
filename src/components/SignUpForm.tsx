@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-
 import TextInput from './form/TextInput';
 import SubmitButton from './form/SubmitButton';
 import { device } from '../config/themes';
 import useForm from '../hooks/useForm';
 import { UserBasic } from '../interfaces/common';
+import { createUserWithEmailAndPassword } from '../auth';
 
 const Wrapper = styled.div`
   display: flex;
@@ -42,7 +42,9 @@ const Heading = styled.h3`
 `;
 
 const SignUpForm = () => {
-  const { data, errors, handleChange, handleSubmit } = useForm<UserBasic>({
+  const { data, errors, handleChange, handleSubmit } = useForm<
+    { password: string; passwordConfirm: string } & UserBasic
+  >({
     validations: {
       email: {
         required: {
@@ -62,9 +64,24 @@ const SignUpForm = () => {
           message: 'Please enter your last name',
         },
       },
+      password: {
+        required: {
+          value: true,
+          message: 'Please enter a password',
+        },
+      },
+      passwordConfirm: {
+        custom: {
+          isValid: (value): boolean => {
+            console.log('check', data.password === value);
+            return data.password === value;
+          },
+          message: 'Passwords must match',
+        },
+      },
     },
     onSubmit: () => {
-      console.log('Sent..');
+      createUserWithEmailAndPassword(data.email, data.password);
     },
   });
   return (
@@ -97,7 +114,23 @@ const SignUpForm = () => {
               label="Last Name"
               error={errors.lastName}
             />
-            <SubmitButton>Sign In</SubmitButton>
+            <TextInput
+              type="password"
+              name="password"
+              value={data.password || ''}
+              handleChange={handleChange('password')}
+              label="Password"
+              error={errors.password}
+            />
+            <TextInput
+              type="password"
+              name="passwordConfirm"
+              value={data.passwordConfirm || ''}
+              handleChange={handleChange('passwordConfirm')}
+              label="Confirm password"
+              error={errors.passwordConfirm}
+            />
+            <SubmitButton>Sign Up</SubmitButton>
           </form>
         </ContainerWrapper>
       </Card>
