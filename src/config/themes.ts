@@ -7,6 +7,7 @@ export const themes = {
     },
     colors: {
       background: {
+        default: '#ffffff',
         main: '#ffffff',
         alt: '#FAFBFC',
       },
@@ -20,6 +21,7 @@ export const themes = {
         default: '#06263F',
         light: '#908DA3',
         highLightLabel: '#ffffff',
+        accent: '#fcab47',
       },
     },
   },

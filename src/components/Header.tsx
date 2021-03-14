@@ -25,6 +25,7 @@ const NavItems = styled.ul`
   justify-content: flex-end;
   list-style: none;
   align-items: center;
+  font-weight: 600;
 
   li {
     display: block;
@@ -33,6 +34,10 @@ const NavItems = styled.ul`
     a {
       text-decoration: none;
       color: ${({ theme }) => theme.colors.text.light};
+
+      &:hover {
+        color: ${({ theme }) => theme.colors.text.accent};
+      }
     }
 
     &.signup {

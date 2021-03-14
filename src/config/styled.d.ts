@@ -8,6 +8,7 @@ declare module 'styled-components' {
 
     colors: {
       background: {
+        default: string;
         main: string;
         alt: string;
       };
@@ -21,6 +22,7 @@ declare module 'styled-components' {
         default: string;
         light: string;
         highLightLabel: string;
+        accent: string;
       };
     };
   }
