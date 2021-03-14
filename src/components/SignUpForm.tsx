@@ -41,13 +41,6 @@ const Heading = styled.h3`
   text-align: center;
 `;
 
-const Error = styled.p`
-  font-size: 0.8rem;
-  color: red;
-  margin: 10px 0;
-  padding: 0;
-`;
-
 const SignUpForm = () => {
   const { data, errors, handleChange, handleSubmit } = useForm<UserBasic>({
     validations: {
@@ -86,24 +79,24 @@ const SignUpForm = () => {
               value={data.email || ''}
               handleChange={handleChange('email')}
               label="Email"
+              error={errors.email}
             />
-            {errors.email && <Error>{errors.email}</Error>}
             <TextInput
               type="text"
               name="firstName"
               value={data.firstName || ''}
               handleChange={handleChange('firstName')}
               label="First Name"
+              error={errors.firstName}
             />
-            {errors.firstName && <Error>{errors.firstName}</Error>}
             <TextInput
               type="text"
               name="lastName"
               value={data.lastName || ''}
               handleChange={handleChange('lastName')}
               label="Last Name"
+              error={errors.lastName}
             />
-            {errors.lastName && <Error>{errors.lastName}</Error>}
             <SubmitButton>Sign In</SubmitButton>
           </form>
         </ContainerWrapper>

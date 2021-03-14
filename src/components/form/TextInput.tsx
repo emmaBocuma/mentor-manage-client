@@ -29,6 +29,9 @@ const TextInputContainer = styled.input`
     font-size: 12px;
     color: ${({ theme }) => theme.colors.text.light};
   }
+  &.error {
+    border-bottom: 1px solid red;
+  }
 `;
 
 const TextInputLabel = styled.label`
@@ -46,6 +49,13 @@ const TextInputLabel = styled.label`
   }
 `;
 
+const Error = styled.p`
+  font-size: 0.8rem;
+  color: red;
+  margin: 10px 0;
+  padding: 0;
+`;
+
 interface ITextInput {
   handleChange(e: React.ChangeEvent<HTMLInputElement>): void;
   label: string;
@@ -53,6 +63,7 @@ interface ITextInput {
   type: string;
   name: string;
   required?: boolean;
+  error?: string;
 }
 
 const TextInput = ({
@@ -61,6 +72,7 @@ const TextInput = ({
   value,
   required,
   name,
+  error,
 }: ITextInput) => (
   <GroupContainer>
     <TextInputContainer
@@ -68,7 +80,9 @@ const TextInput = ({
       name={name}
       value={value}
       required={required}
+      className={error ? 'error' : ''}
     />
+    {error ? <Error>{error}</Error> : null}
     {label ? (
       <TextInputLabel className={value.length ? 'shrink' : ''}>
         {label}
