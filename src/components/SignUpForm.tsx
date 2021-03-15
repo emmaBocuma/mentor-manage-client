@@ -81,7 +81,7 @@ const SignUpForm = () => {
       },
     },
     onSubmit: () => {
-      createUserWithEmailAndPassword(data.email, data.password);
+      createUserWithEmailAndPassword(data);
     },
   });
   return (

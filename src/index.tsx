@@ -7,14 +7,14 @@ import App from './App';
 import { GlobalStyles, themes } from './config/themes';
 import config from './config';
 
-const client = new ApolloClient({
+export const apolloClient = new ApolloClient({
   uri: config.api,
   cache: new InMemoryCache(),
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <ApolloProvider client={apolloClient}>
       <ThemeProvider theme={themes.default}>
         <GlobalStyles />
         <BrowserRouter>

@@ -1,6 +1,19 @@
 import firebase from './firebase';
+import { gql } from '@apollo/client';
+import { apolloClient } from '../';
+import { UserBasic } from '../interfaces/common';
 
 export const auth = firebase.auth();
+
+const CREATE_USER = gql`
+  mutation CreateUser($user: CreateUserInput!) {
+    createUser(user: $user) {
+      firstName
+      lastName
+      email
+    }
+  }
+`;
 
 export const signInWithEmailAndPassword = async (
   email: string,
@@ -11,13 +24,19 @@ export const signInWithEmailAndPassword = async (
 };
 
 export const createUserWithEmailAndPassword = async (
-  email: string,
-  password: string
+  user: UserBasic & { password: string }
 ) => {
-  console.log('Creating user');
-  const result = await auth.createUserWithEmailAndPassword(email, password);
-  console.log(result);
-  return result.user;
+  const result = await auth.createUserWithEmailAndPassword(
+    user.email,
+    user.password
+  );
+  const { email, firstName, lastName } = user;
+  const authId = result.user?.uid;
+  const userCreated = await apolloClient.mutate({
+    mutation: CREATE_USER,
+    variables: { user: { email, firstName, lastName, authId } },
+  });
+  return userCreated.data.createUser;
 };
 
 export const signOut = async () => {
