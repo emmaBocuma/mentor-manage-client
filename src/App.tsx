@@ -2,8 +2,9 @@ import { createContext, useEffect, useState } from 'react';
 import Header from './components/Header';
 import { Route } from 'react-router-dom';
 import { auth } from './auth';
-import SignupPage from './pages/SignUpPage';
+import SignUpPage from './pages/SignUpPage';
 import UserListPage from './pages/UserListPage';
+import SignInPage from './pages/SignInPage';
 
 interface AuthUser {
   uid: string;
@@ -25,7 +26,8 @@ const App = () => {
     <AuthContext.Provider value={currentUser}>
       <div className="container">
         <Header />
-        <Route path="/signup" component={SignupPage} />
+        <Route path="/signup" component={SignUpPage} />
+        <Route path="/signin" component={SignInPage} />
         <Route path="/users" component={UserListPage} />
       </div>
     </AuthContext.Provider>

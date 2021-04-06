@@ -6,7 +6,7 @@ interface Validation {
     message: string;
   };
   pattern?: {
-    value: string;
+    value: RegExp;
     message: string;
   };
   custom?: {
@@ -34,7 +34,7 @@ const useForm = <T extends Record<keyof T, any> = {}>(options?: {
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validations = options?.validations;
     if (validations) {

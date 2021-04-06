@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import SignUpForm from '../components/SignUpForm';
+import SignInForm from '../components/SignInForm';
 
 const Wrapper = styled.main``;
 
@@ -20,7 +20,7 @@ const SignInPage = () => {
     <Wrapper>
       <Section>
         <FormContainer>
-          <SignUpForm />
+          <SignInForm />
         </FormContainer>
       </Section>
     </Wrapper>

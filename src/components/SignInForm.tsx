@@ -52,6 +52,12 @@ const SignInForm = () => {
           message: 'Please enter an email address',
         },
       },
+      password: {
+        required: {
+          value: true,
+          message: 'Please enter a password',
+        },
+      },
     },
     onSubmit: () => {
       signInWithEmailAndPassword(data.email, data.password);
@@ -64,7 +70,7 @@ const SignInForm = () => {
         <ContainerWrapper>
           <form className="sign-up-form" onSubmit={handleSubmit}>
             <TextInput
-              type="email"
+              type="text"
               name="email"
               value={data.email || ''}
               handleChange={handleChange('email')}

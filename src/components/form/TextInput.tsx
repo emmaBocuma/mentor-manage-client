@@ -43,7 +43,7 @@ const TextInputLabel = styled.label`
   top: 8px;
   transition: 300ms ease all;
   &.shrink {
-    top: -15px;
+    top: -14px;
     font-size: 12px;
     color: ${({ theme }) => theme.colors.text.light};
   }
