@@ -3,7 +3,6 @@ import TextInput from './form/TextInput';
 import SubmitButton from './form/SubmitButton';
 import { device } from '../config/themes';
 import useForm from '../hooks/useForm';
-import { signInWithEmailAndPassword } from '../auth';
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,7 +39,9 @@ const Heading = styled.h3`
   text-align: center;
 `;
 
-const SignInForm = () => {
+const SignInForm: React.FC<{
+  signInHandler: (email: string, password: string) => void;
+}> = ({ signInHandler }) => {
   const { data, errors, handleChange, handleSubmit } = useForm<{
     password: string;
     email: string;
@@ -60,7 +61,7 @@ const SignInForm = () => {
       },
     },
     onSubmit: () => {
-      signInWithEmailAndPassword(data.email, data.password);
+      signInHandler(data.email, data.password);
     },
   });
   return (
@@ -83,6 +84,7 @@ const SignInForm = () => {
               value={data.password || ''}
               handleChange={handleChange('password')}
               label="Password"
+              error={errors.password}
             />
             <SubmitButton>Sign In</SubmitButton>
           </form>

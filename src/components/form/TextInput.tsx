@@ -78,15 +78,16 @@ const TextInput = ({
   <GroupContainer>
     <TextInputContainer
       onChange={handleChange}
+      id={name}
       name={name}
       value={value}
       type={type}
       required={required}
       className={error ? 'error' : ''}
     />
-    {error ? <Error>{error}</Error> : null}
+    {error ? <Error data-testid={`input-error-${name}`}>{error}</Error> : null}
     {label ? (
-      <TextInputLabel className={value.length ? 'shrink' : ''}>
+      <TextInputLabel htmlFor={name} className={value.length ? 'shrink' : ''}>
         {label}
       </TextInputLabel>
     ) : null}

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import SignInForm from '../components/SignInForm';
+import { signInWithEmailAndPassword } from '../auth';
 
 const Wrapper = styled.main``;
 
@@ -20,7 +21,7 @@ const SignInPage = () => {
     <Wrapper>
       <Section>
         <FormContainer>
-          <SignInForm />
+          <SignInForm signInHandler={signInWithEmailAndPassword} />
         </FormContainer>
       </Section>
     </Wrapper>
