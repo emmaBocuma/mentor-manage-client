@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { StyledComponentProps } from '../../types/styled';
 
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.button.default};
@@ -16,8 +17,11 @@ export const Button = styled.button`
   margin: 20px 0;
 `;
 
-const SubmitButton: React.FC = ({ children }) => {
-  return <Button>{children}</Button>;
+const SubmitButton: React.FC<StyledComponentProps> = ({
+  children,
+  className,
+}) => {
+  return <Button className={className}>{children}</Button>;
 };
 
 export default SubmitButton;

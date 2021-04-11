@@ -6,7 +6,7 @@ import { AuthContext } from '../App';
 import { signOut } from '../auth';
 
 const Wrapper = styled.header`
-  position: sticky;
+  /* position: sticky; */
 `;
 const Menu = styled.div`
   padding: 0 20px;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TextInput from './form/TextInput';
 import SubmitButton from './form/SubmitButton';
-import { device } from '../config/themes';
 import useForm from '../hooks/useForm';
 import { IAuth } from '../auth';
 
@@ -10,10 +10,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
-  @media ${device.tablet} {
-    flex-direction: row;
-  }
 `;
 const Card = styled.div`
   background-color: ${({ theme }) => theme.colors.background.default};
@@ -31,7 +27,7 @@ const ContainerWrapper = styled.div`
 `;
 
 const Heading = styled.h3`
-  font-size: 1rem;
+  font-size: 1.2rem;
   background-color: ${({ theme }) => theme.colors.accent};
   color: ${({ theme }) => theme.colors.text.highLightLabel};
   padding: 0;
@@ -46,6 +42,17 @@ const AuthError = styled.p`
   color: ${({ theme }) => theme.colors.error};
   margin: 0;
   padding: 0;
+`;
+
+const Aside = styled.aside`
+  font-size: 0.8em;
+  color: ${({ theme }) => theme.colors.text.default};
+  margin-left: 30px;
+`;
+
+const StyledSubmitButton = styled(SubmitButton)`
+  margin-top: 40px;
+  width: 100%;
 `;
 
 type SignInFormProps = {
@@ -88,7 +95,7 @@ const SignInForm: React.FC<SignInFormProps> = ({
   return (
     <Wrapper>
       <Card>
-        <Heading>Sign in</Heading>
+        <Heading>Sign in to your account</Heading>
         <ContainerWrapper>
           <form className="sign-up-form" onSubmit={handleSubmit}>
             <TextInput
@@ -107,11 +114,14 @@ const SignInForm: React.FC<SignInFormProps> = ({
               label="Password"
               error={errors.password}
             />
-            <SubmitButton>Sign In</SubmitButton>
+            <StyledSubmitButton>Sign In</StyledSubmitButton>
             <AuthError data-testid="auth-error">{authError}</AuthError>
           </form>
         </ContainerWrapper>
       </Card>
+      <Aside>
+        Don't have an account? <Link to="/signup">Sign up</Link>
+      </Aside>
     </Wrapper>
   );
 };

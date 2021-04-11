@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import SignUpForm from '../components/SignUpForm';
 
-const Wrapper = styled.main``;
-
-const Section = styled.section`
-  background: linear-gradient(180deg, #ffffff 0%, #f1f5fa 47%);
+const Wrapper = styled.main`
+  flex: 1;
+  background: ${(props) =>
+    `linear-gradient(180deg, ${props.theme.colors.background.main}  0%, ${props.theme.colors.background.alt} 47%)`};
 `;
+
+const Section = styled.section``;
 
 const FormContainer = styled.div`
   margin-left: auto;

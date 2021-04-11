@@ -1,7 +1,7 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import TextInput from './form/TextInput';
 import SubmitButton from './form/SubmitButton';
-import { device } from '../config/themes';
 import useForm from '../hooks/useForm';
 import { UserBasic } from '../interfaces/common';
 import { createUserWithEmailAndPassword } from '../auth';
@@ -10,10 +10,6 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-
-  @media ${device.tablet} {
-    flex-direction: row;
-  }
 `;
 const Card = styled.div`
   background-color: ${({ theme }) => theme.colors.background.default};
@@ -31,7 +27,7 @@ const ContainerWrapper = styled.div`
 `;
 
 const Heading = styled.h3`
-  font-size: 1rem;
+  font-size: 1.2rem;
   background-color: ${({ theme }) => theme.colors.accent};
   color: ${({ theme }) => theme.colors.text.highLightLabel};
   padding: 0;
@@ -39,6 +35,17 @@ const Heading = styled.h3`
   border-radius: 15px 15px 0 0;
   padding: 20px;
   text-align: center;
+`;
+
+const StyledSubmitButton = styled(SubmitButton)`
+  margin-top: 40px;
+  width: 100%;
+`;
+
+const Aside = styled.aside`
+  font-size: 0.8em;
+  color: ${({ theme }) => theme.colors.text.default};
+  margin-left: 30px;
 `;
 
 const SignUpForm = () => {
@@ -130,10 +137,13 @@ const SignUpForm = () => {
               label="Confirm password"
               error={errors.passwordConfirm}
             />
-            <SubmitButton>Sign Up</SubmitButton>
+            <StyledSubmitButton>Sign Up</StyledSubmitButton>
           </form>
         </ContainerWrapper>
       </Card>
+      <Aside>
+        Have an account? <Link to="/signin">Sign in</Link>
+      </Aside>
     </Wrapper>
   );
 };

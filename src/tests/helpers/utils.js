@@ -1,9 +1,14 @@
 import { ThemeProvider } from 'styled-components';
+import { BrowserRouter } from 'react-router-dom';
 import { themes } from '../../config/themes';
 import { render } from '@testing-library/react';
 
 const AllTheProviders = ({ children }) => {
-  return <ThemeProvider theme={themes.default}>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={themes.default}>
+      <BrowserRouter>{children}</BrowserRouter>
+    </ThemeProvider>
+  );
 };
 
 const customRender = (ui, options) =>

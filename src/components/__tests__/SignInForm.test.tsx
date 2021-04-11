@@ -5,9 +5,10 @@ import userEvent from '@testing-library/user-event';
 
 describe('Sign In Form', () => {
   const signInFn = jest.fn();
+  const successFn = jest.fn();
 
   it('shows error for email and password field if invalid or missing', () => {
-    render(<SignInForm signInHandler={signInFn} />);
+    render(<SignInForm signInHandler={signInFn} successHandler={successFn} />);
     const submitBtn = screen.getByRole('button', { name: /Sign In/i });
 
     userEvent.click(submitBtn);
@@ -21,7 +22,7 @@ describe('Sign In Form', () => {
   });
 
   it('hides errors while user is typing', () => {
-    render(<SignInForm signInHandler={signInFn} />);
+    render(<SignInForm signInHandler={signInFn} successHandler={successFn} />);
     const submitBtn = screen.getByRole('button', { name: /Sign In/i });
 
     userEvent.click(submitBtn);
@@ -35,7 +36,7 @@ describe('Sign In Form', () => {
 
   it('submits form if all fields valid', () => {
     const signInFn = jest.fn();
-    render(<SignInForm signInHandler={signInFn} />);
+    render(<SignInForm signInHandler={signInFn} successHandler={successFn} />);
 
     const submitBtn = screen.getByRole('button', { name: /Sign In/i });
 
@@ -55,7 +56,7 @@ describe('Sign In Form', () => {
         },
       };
     });
-    render(<SignInForm signInHandler={signInFn} />);
+    render(<SignInForm signInHandler={signInFn} successHandler={successFn} />);
 
     const submitBtn = screen.getByRole('button', { name: /Sign In/i });
 

@@ -11,6 +11,7 @@ declare module 'styled-components' {
         default: string;
         main: string;
         alt: string;
+        medium: string;
       };
       accent: string;
       highlight: string;
@@ -23,6 +24,7 @@ declare module 'styled-components' {
         light: string;
         highLightLabel: string;
         accent: string;
+        extraLight: string;
       };
       error: string;
     };

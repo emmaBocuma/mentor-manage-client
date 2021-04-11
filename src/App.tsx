@@ -7,6 +7,8 @@ import UserListPage from './pages/UserListPage';
 import SignInPage from './pages/SignInPage';
 import DashboardPage from './pages/DashboardPage';
 import PublicHomePage from './pages/PublicHomePage';
+import Footer from './components/Footer';
+import styled from 'styled-components';
 interface AuthUser {
   uid: string;
   email: string | null;
@@ -16,6 +18,12 @@ export const AuthContext = createContext<AuthUser | null>(null);
 interface PrivateRouteProps extends Omit<RouteProps, 'component'> {
   component: React.ElementType;
 }
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState<AuthUser | null>(null);
@@ -41,7 +49,7 @@ const App = () => {
 
   return (
     <AuthContext.Provider value={currentUser}>
-      <div className="container">
+      <Container>
         <Header />
         <Switch>
           <Route path="/" exact component={PublicHomePage} />
@@ -57,7 +65,8 @@ const App = () => {
           <PrivateRoute path="/dashboard" component={DashboardPage} />
           <Redirect path="*" to="/" />
         </Switch>
-      </div>
+        <Footer />
+      </Container>
     </AuthContext.Provider>
   );
 };
