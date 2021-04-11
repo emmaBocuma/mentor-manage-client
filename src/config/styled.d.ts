@@ -24,6 +24,7 @@ declare module 'styled-components' {
         highLightLabel: string;
         accent: string;
       };
+      error: string;
     };
   }
 }

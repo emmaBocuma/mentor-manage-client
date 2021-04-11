@@ -45,4 +45,28 @@ describe('Sign In Form', () => {
 
     expect(signInFn).toHaveBeenCalledTimes(1);
   });
+
+  it('handles errors from auth signInHandler function', async () => {
+    const errorMsg = 'An error has occurred';
+    const signInFn = jest.fn(async () => {
+      return {
+        error: {
+          message: errorMsg,
+        },
+      };
+    });
+    render(<SignInForm signInHandler={signInFn} />);
+
+    const submitBtn = screen.getByRole('button', { name: /Sign In/i });
+
+    userEvent.type(screen.getByLabelText('Email'), 'name@domain.com');
+    userEvent.type(screen.getByLabelText('Password'), 'dummypass');
+    userEvent.click(submitBtn);
+
+    const authError = await screen.findByTestId('auth-error');
+
+    expect(signInFn).toHaveBeenCalledTimes(1);
+    expect(authError).toBeInTheDocument();
+    expect(authError.textContent).toBe(errorMsg);
+  });
 });

@@ -23,6 +23,7 @@ export const themes = {
         highLightLabel: '#ffffff',
         accent: '#fcab47',
       },
+      error: '#c7081e',
     },
   },
 };

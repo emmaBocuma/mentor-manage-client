@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import SignInForm from '../components/SignInForm';
 import { signInWithEmailAndPassword } from '../auth';
 
@@ -17,11 +18,15 @@ const FormContainer = styled.div`
   padding: 10px 0;
 `;
 const SignInPage = () => {
+  const history = useHistory();
   return (
     <Wrapper>
       <Section>
         <FormContainer>
-          <SignInForm signInHandler={signInWithEmailAndPassword} />
+          <SignInForm
+            signInHandler={signInWithEmailAndPassword}
+            successHandler={() => history.push('/dashboard')}
+          />
         </FormContainer>
       </Section>
     </Wrapper>

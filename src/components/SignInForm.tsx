@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 import TextInput from './form/TextInput';
 import SubmitButton from './form/SubmitButton';
 import { device } from '../config/themes';
 import useForm from '../hooks/useForm';
+import { IAuth } from '../auth';
 
 const Wrapper = styled.div`
   display: flex;
@@ -39,9 +41,22 @@ const Heading = styled.h3`
   text-align: center;
 `;
 
-const SignInForm: React.FC<{
-  signInHandler: (email: string, password: string) => void;
-}> = ({ signInHandler }) => {
+const AuthError = styled.p`
+  font-size: 0.7em;
+  color: ${({ theme }) => theme.colors.error};
+  margin: 0;
+  padding: 0;
+`;
+
+type SignInFormProps = {
+  signInHandler: (email: string, password: string) => Promise<IAuth>;
+  successHandler: () => void;
+};
+
+const SignInForm: React.FC<SignInFormProps> = ({
+  signInHandler,
+  successHandler,
+}) => {
   const { data, errors, handleChange, handleSubmit } = useForm<{
     password: string;
     email: string;
@@ -60,10 +75,16 @@ const SignInForm: React.FC<{
         },
       },
     },
-    onSubmit: () => {
-      signInHandler(data.email, data.password);
+    onSubmit: async () => {
+      const result = await signInHandler(data.email, data.password);
+      if (result?.error) {
+        return setAuthError(result.error.message);
+      }
+      successHandler();
     },
   });
+
+  const [authError, setAuthError] = useState('');
   return (
     <Wrapper>
       <Card>
@@ -87,6 +108,7 @@ const SignInForm: React.FC<{
               error={errors.password}
             />
             <SubmitButton>Sign In</SubmitButton>
+            <AuthError data-testid="auth-error">{authError}</AuthError>
           </form>
         </ContainerWrapper>
       </Card>

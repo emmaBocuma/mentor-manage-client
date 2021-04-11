@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { ReactComponent as LogoSVG } from '../assets/logo.svg';
 import { AuthContext } from '../App';
 import { signOut } from '../auth';
@@ -68,6 +68,7 @@ const NavItems = styled.ul`
 
 const Header = () => {
   const currentUser = useContext(AuthContext);
+  const history = useHistory();
   return (
     <Wrapper>
       <Menu>
@@ -89,7 +90,16 @@ const Header = () => {
             </li>
             {currentUser ? (
               <li>
-                <button onClick={() => signOut()}>Sign out</button>
+                <button
+                  onClick={async () => {
+                    const result = await signOut();
+                    if (!result?.error) {
+                      history.push('/');
+                    }
+                  }}
+                >
+                  Sign out
+                </button>
               </li>
             ) : (
               <>

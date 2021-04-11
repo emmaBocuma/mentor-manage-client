@@ -51,7 +51,7 @@ const TextInputLabel = styled.label`
 
 const Error = styled.p`
   font-size: 0.8rem;
-  color: red;
+  color: ${({ theme }) => theme.colors.error};
   margin: 10px 0;
   padding: 0;
 `;
