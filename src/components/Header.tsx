@@ -9,8 +9,7 @@ const Wrapper = styled.header`
   /* position: sticky; */
 `;
 const Menu = styled.div`
-  padding: 0 20px;
-  max-width: 1100px;
+  max-width: ${(props) => `${props.theme.widths.default}px`};
   margin-left: auto;
   margin-right: auto;
   display: flex;

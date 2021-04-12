@@ -28,5 +28,9 @@ declare module 'styled-components' {
       };
       error: string;
     };
+
+    widths: {
+      default: number;
+    };
   }
 }

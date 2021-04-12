@@ -27,6 +27,9 @@ export const themes = {
       },
       error: '#c7081e',
     },
+    widths: {
+      default: 1100,
+    },
   },
 };
 
